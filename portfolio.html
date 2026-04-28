@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tom Meyer — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ed;
+    --ink: #1a1a18;
+    --ink-muted: #6b6860;
+    --accent: #2d4a3e;
+    --accent-light: #e8efe9;
+    --rule: #d4cfc6;
+    --card-bg: #ffffff;
+    --tag-bg: #eae6df;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 3rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding: 9rem 3rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .hero-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-label::after {
+    content: '';
+    display: inline-block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--ink-muted);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-right {
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--tag-bg);
+    border: 1px solid var(--rule);
+    padding: 0.3rem 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    border-radius: 2px;
+  }
+
+  /* SECTION TITLES */
+  .section-header {
+    padding: 0 3rem;
+    max-width: 1100px;
+    margin: 4rem auto 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  /* PROJECTS */
+  .projects {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  }
+
+  .project-header {
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .project-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--rule);
+  }
+
+  .project-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+
+  .project-type {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-subtitle {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  .project-toggle {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--rule);
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    transition: background 0.2s;
+    border-radius: 2px;
+  }
+
+  .project-toggle:hover { background: var(--tag-bg); }
+
+  .toggle-icon {
+    font-size: 14px;
+    color: var(--ink-muted);
+    transition: transform 0.3s;
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1;
+  }
+
+  .project-card.open .toggle-icon {
+    transform: rotate(45deg);
+  }
+
+  .project-body {
+    display: none;
+    border-top: 1px solid var(--rule);
+    padding: 2.5rem;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .project-card.open .project-body {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .project-body-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 3rem;
+  }
+
+  .project-abstract h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .project-abstract p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .results-block {
+    background: var(--bg);
+    border-left: 2px solid var(--accent);
+    padding: 1.2rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .results-block h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .results-block ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.9;
+  }
+
+  .results-block ul li::before {
+    content: '→ ';
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+  }
+
+  .project-sidebar h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .sidebar-block {
+    margin-bottom: 1.8rem;
+  }
+
+  .sidebar-block p {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  .method-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .method-list li {
+    background: var(--tag-bg);
+    border: 1px solid var(--rule);
+    padding: 0.25rem 0.65rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    border-radius: 2px;
+  }
+
+  .data-line {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  /* SKILLS — new layout */
+  .skill-list-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem 1rem;
+  }
+
+  .skill-list-cols span {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .skill-level-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-level-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .skill-level-names {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .skill-level-names span {
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .skill-level-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .level-high {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid #c0d8c7;
+  }
+
+  .level-mid {
+    background: #f0ede6;
+    color: #7a6f5a;
+    border: 1px solid var(--rule);
+  }
+
+  .level-low {
+    background: var(--tag-bg);
+    color: var(--ink-muted);
+    border: 1px solid var(--rule);
+  }
+
+  .domain-note {
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+  }
+
+  .domain-note-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .domain-tags span {
+    background: var(--tag-bg);
+    border: 1px solid var(--rule);
+    padding: 0.25rem 0.65rem;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-radius: 2px;
+  }
+
+
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .skill-cell {
+    background: var(--card-bg);
+    padding: 1.8rem 2rem;
+  }
+
+  .skill-cell h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+  }
+
+  .skill-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+
+  .skill-name {
+    color: var(--ink);
+  }
+
+  .skill-bar-wrap {
+    width: 80px;
+    height: 3px;
+    background: var(--rule);
+  }
+
+  .skill-bar {
+    height: 100%;
+    background: var(--accent);
+    transition: width 1s ease;
+  }
+
+  /* ABOUT — commenté / caché */
+  /*
+  .about-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem 6rem;
+  }
+  .about-inner {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .about-inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .about-inner p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+  .contact-list {
+    list-style: none;
+    font-size: 13px;
+  }
+  .contact-list li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 1rem;
+  }
+  .contact-list .c-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+  }
+  .contact-list a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  */
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 2rem; }
+    .section-header, .projects, .skills-grid { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .project-body-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">TOM MEYER</a>
+  <ul class="nav-links">
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <!-- <li><a href="#contact">Contact</a></li> -->
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-label">Portfolio</div>
+    <h1>Économie<br><em>& Économétrie</em></h1>
+  </div>
+  <div class="hero-right">
+    <p class="hero-desc">
+      Étudiant en économie internationale et économétrie à l'Université Paris Dauphine–PSL.
+      Intéressé par l'analyse quantitative appliquée, les enjeux macroéconomiques et les politiques publiques de développement.
+    </p>
+    <div class="hero-meta">
+      <span class="badge">Paris Dauphine – PSL</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJETS -->
+<div class="section-header" id="projets">
+  <h2>Projets de recherche</h2>
+  <div class="section-rule"></div>
+  <span class="section-num">02</span>
+</div>
+
+<div class="projects">
+
+  <!-- PROJET 1 : Mémoire (mis en premier) -->
+  <div class="project-card" id="card-memoire">
+    <div class="project-header" onclick="toggle('card-memoire')">
+      <div>
+        <div class="project-meta-top">
+          <span class="project-num">01</span>
+          <span class="project-year">2026</span>
+          <span class="project-type">Mémoire</span>
+        </div>
+        <div class="project-title">The Impact of Heat Shocks on Women's Domestic Labour in Morocco</div>
+        <div class="project-subtitle">Avec Sara Gougeon — Économie du travail, genre et changement climatique</div>
+      </div>
+      <button class="project-toggle" aria-label="Ouvrir">
+        <span class="toggle-icon">+</span>
+      </button>
+    </div>
+
+    <div class="project-body">
+      <div class="project-body-grid">
+        <div class="project-abstract">
+          <h3>Question de recherche</h3>
+          <p>
+            Dans quelle mesure les chocs thermiques au Maroc affectent-ils le travail domestique des femmes
+            par rapport aux hommes au sein d'un même ménage ?
+          </p>
+          <p>
+            Ce mémoire explore les liens entre changement climatique, genre et travail non rémunéré dans
+            la région MENA. En exploitant la variation inter-régionale d'un indice de chaleur construit
+            à partir des données ERA5 (ECMWF), nous estimons l'effet différentiel des chocs thermiques
+            sur l'allocation du temps entre hommes et femmes, en nous appuyant sur l'enquête nationale
+            marocaine d'utilisation du temps de 2012 (16 315 individus, 8 990 ménages).
+          </p>
+          <p>
+            La stratégie d'identification repose sur des effets fixes ménage afin de contrôler tout
+            facteur non observable commun aux membres d'un même foyer, notamment l'exposition
+            climatique elle-même.
+          </p>
+
+          <div class="results-block">
+            <h3>Résultats principaux</h3>
+            <ul>
+              <li>Absence d'effet significatif sur le travail domestique agrégé — mais hétérogénéité urbain/rural marquée</li>
+              <li>+33,5 min/jour de travail domestique pour les femmes rurales par °C de choc thermique (p &lt; 0,001)</li>
+              <li>−12,2 min/jour en zone urbaine (p &lt; 0,05) — mécanismes de substitution différents</li>
+              <li>+9,4 min/jour de soins (care work) : +27 % vs la moyenne féminine (p &lt; 0,001)</li>
+              <li>−31,2 min/jour de temps de loisirs pour les femmes — signal de dégradation du bien-être</li>
+              <li>−58,6 min/jour d'activité professionnelle en zone rurale, principalement via l'agriculture</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-sidebar">
+          <div class="sidebar-block">
+            <h3>Méthodes</h3>
+            <ul class="method-list">
+              <li>MCO / FE ménage</li>
+              <li>Interaction DiD</li>
+              <li>Heat index (Rothfusz)</li>
+              <li>Spécification binaire</li>
+              <li>Erreurs clustérisées</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Données</h3>
+            <div class="data-line">
+              <span>ERA5 — ECMWF (1950–2023)</span>
+              <span>Enquête ENET Maroc 2012</span>
+              <span>14 748 observations (estimation)</span>
+              <span>11 régions marocaines</span>
+            </div>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Logiciels</h3>
+            <ul class="method-list">
+              <li>R</li>
+              <li>fixest</li>
+              <li>ggplot2</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Thèmes</h3>
+            <ul class="method-list">
+              <li>Genre & temps</li>
+              <li>Climat & travail</li>
+              <li>Économie du soin</li>
+              <li>MENA</li>
+              <li>Politique publique</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 2 : Économétrie II -->
+  <div class="project-card" id="card-eco2">
+    <div class="project-header" onclick="toggle('card-eco2')">
+      <div>
+        <div class="project-meta-top">
+          <span class="project-num">02</span>
+          <span class="project-year">2025</span>
+          <span class="project-type">Projet de cours</span>
+        </div>
+        <div class="project-title">Dynamique conjointe des émissions de CO₂ et de la valeur ajoutée industrielle en France</div>
+        <div class="project-subtitle">Avec Gabin Briand — Modélisation ARIMA et VAR, série temporelle 1970–2018</div>
+      </div>
+      <button class="project-toggle" aria-label="Ouvrir">
+        <span class="toggle-icon">+</span>
+      </button>
+    </div>
+
+    <div class="project-body">
+      <div class="project-body-grid">
+        <div class="project-abstract">
+          <h3>Problématique</h3>
+          <p>
+            La croissance industrielle française entraîne-t-elle mécaniquement des émissions de CO₂ ?
+            Ce projet d'économétrie II analyse la relation dynamique entre la valeur ajoutée (VA)
+            du secteur industriel et ses émissions de CO₂ sur la période 1970–2018,
+            à partir de données annuelles de la Banque Mondiale.
+          </p>
+          <p>
+            La modélisation est conduite en deux temps : une analyse univariée (tests de racine unitaire,
+            identification ARIMA, prévisions) puis une modélisation multivariée (VAR, causalité de Granger,
+            fonctions impulsion-réponse, projections locales, test de Johansen).
+          </p>
+
+          <div class="results-block">
+            <h3>Résultats principaux</h3>
+            <ul>
+              <li>Les deux séries en log sont I(1) — processus DS sans tendance déterministe</li>
+              <li>Modèle retenu : ARIMA(0,1,1) avec dérive — croissance annuelle moyenne de +1,07 %</li>
+              <li>VAR(1) stationnaire — critères AIC/BIC convergent unanimement sur p = 1</li>
+              <li>Absence de causalité au sens de Granger dans les deux sens (p > 0,05)</li>
+              <li>Projections locales : effet boom-bust de ln CO₂ sur ln VA (positif à h=1, négatif à h=6–7)</li>
+              <li>Absence de cointégration (test de Johansen, rang r = 0) — pas de VECM nécessaire</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-sidebar">
+          <div class="sidebar-block">
+            <h3>Méthodes</h3>
+            <ul class="method-list">
+              <li>Tests ADF & KPSS</li>
+              <li>ARIMA</li>
+              <li>VAR(p)</li>
+              <li>Granger</li>
+              <li>FIR / IRF</li>
+              <li>Local Projections</li>
+              <li>Johansen</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Données</h3>
+            <div class="data-line">
+              <span>Banque Mondiale (1970–2018)</span>
+              <span>VA industrielle (USD constants)</span>
+              <span>Émissions CO₂ (Mt CO₂e)</span>
+              <span>Fréquence annuelle — 49 obs.</span>
+            </div>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Logiciels</h3>
+            <ul class="method-list">
+              <li>R</li>
+              <li>urca</li>
+              <li>vars</li>
+              <li>forecast</li>
+              <li>ggplot2</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Thèmes</h3>
+            <ul class="method-list">
+              <li>Séries temporelles</li>
+              <li>Économie verte</li>
+              <li>Industrie FR</li>
+              <li>Politique climatique</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PROJET 3 : Variables qualitatives -->
+  <div class="project-card" id="card-quali">
+    <div class="project-header" onclick="toggle('card-quali')">
+      <div>
+        <div class="project-meta-top">
+          <span class="project-num">03</span>
+          <span class="project-year">2026</span>
+          <span class="project-type">Projet de cours</span>
+        </div>
+        <div class="project-title">Déterminants du recours à la mammographie et de la consommation de protéines animales</div>
+        <div class="project-subtitle">Avec Amon Thomer — Modèles logit dichotomique et polytomique non ordonné (SHARE, vague 8)</div>
+      </div>
+      <button class="project-toggle" aria-label="Ouvrir">
+        <span class="toggle-icon">+</span>
+      </button>
+    </div>
+
+    <div class="project-body">
+      <div class="project-body-grid">
+        <div class="project-abstract">
+          <h3>Problématique</h3>
+          <p>
+            Ce projet mobilise des modèles à variables dépendantes qualitatives sur deux questions
+            de santé publique distinctes. La première analyse les déterminants du recours à la mammographie
+            (variable binaire) à partir d'un échantillon de femmes suédoises et espagnoles issues de l'enquête
+            SHARE (vague 8, 2 555 observations). La seconde modélise la fréquence de consommation
+            de protéines animales (variable ordinale à trois modalités) sur l'ensemble de l'échantillon
+            (4 646 individus).
+          </p>
+          <p>
+            Pour la partie dichotomique, la sélection du modèle repose sur la comparaison des critères
+            AIC/BIC entre six spécifications. Pour la partie polytomique, le test de Brant rejette
+            l'hypothèse de pentes parallèles, justifiant le recours à un logit multinomial non ordonné
+            plutôt qu'un logit ordonné.
+          </p>
+
+          <div class="results-block">
+            <h3>Résultats principaux</h3>
+            <ul>
+              <li>Logit : OR = 0,028 pour agecat = 3 — la probabilité de dépistage s'effondre après 79 ans</li>
+              <li>Effet revenu non linéaire : saut marqué au Q4 (OR = 2,24 ; AME = +14,9 pp)</li>
+              <li>Aide apportée à la mère : AME = −21,3 pp en son absence — fort mécanisme intergénérationnel</li>
+              <li>Résider en Espagne réduit la probabilité de dépistage de −13,4 pp vs Suède</li>
+              <li>Test Hosmer-Lemeshow : p = 0,44 — bonne adéquation du modèle aux données</li>
+              <li>Logit multinomial : perception financière du ménage = déterminant principal de la consommation de protéines</li>
+              <li>Les femmes consomment significativement moins de protéines animales que les hommes (p &lt; 0,05)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-sidebar">
+          <div class="sidebar-block">
+            <h3>Méthodes</h3>
+            <ul class="method-list">
+              <li>Logit dichotomique</li>
+              <li>Logit multinomial</li>
+              <li>Test de Brant</li>
+              <li>Effets marginaux (AME)</li>
+              <li>LR test</li>
+              <li>Hosmer-Lemeshow</li>
+              <li>Test de Wald</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Données</h3>
+            <div class="data-line">
+              <span>SHARE — vague 8 (Suède & Espagne)</span>
+              <span>2 555 obs. (logit) / 4 646 obs. (mlogit)</span>
+              <span>Variables : âge, revenu, éducation, IMC, santé perçue</span>
+            </div>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Logiciels</h3>
+            <ul class="method-list">
+              <li>Stata</li>
+              <li>brant</li>
+              <li>margins</li>
+              <li>estat gof</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-block">
+            <h3>Thèmes</h3>
+            <ul class="method-list">
+              <li>Santé publique</li>
+              <li>Inégalités sociales</li>
+              <li>Comportements préventifs</li>
+              <li>Alimentation & revenus</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- COMPÉTENCES -->
+<div class="section-header" id="competences">
+  <h2>Compétences techniques</h2>
+  <div class="section-rule"></div>
+  <span class="section-num">03</span>
+</div>
+
+<div class="skills-grid">
+  <div class="skill-cell">
+    <h3>Économétrie</h3>
+    <div class="skill-list-cols">
+      <span>Séries temporelles (ARIMA, VAR)</span>
+      <span>MCO, effets fixes, panel</span>
+      <span>Modèles à variables qualitatives</span>
+      <span>Diff-in-differences</span>
+      <span>Projections locales</span>
+      <span>Tests de racine unitaire</span>
+      <span>Cointégration (Johansen)</span>
+      <span>Causalité de Granger</span>
+    </div>
+  </div>
+
+  <div class="skill-cell">
+    <h3>Logiciels</h3>
+    <div class="skill-level-list">
+      <div class="skill-level-item">
+        <div class="skill-level-names">
+          <span>R</span>
+          <span>LaTeX</span>
+          <span>Pack Office</span>
+        </div>
+        <span class="skill-level-label level-high">Maîtrise avancée</span>
+      </div>
+      <div class="skill-level-item">
+        <div class="skill-level-names">
+          <span>Stata</span>
+        </div>
+        <span class="skill-level-label level-mid">Niveau intermédiaire avancé</span>
+      </div>
+      <div class="skill-level-item" style="margin-bottom: 0.8rem;">
+        <div class="skill-level-names">
+          <span>Python</span>
+        </div>
+        <span class="skill-level-label level-low">Niveau basique</span>
+      </div>
+      <div style="margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px dashed var(--rule);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Outils complémentaires</span>
+        <div style="margin-top:0.5rem;font-size:13px;color:var(--ink-muted);">Notion, Zotero, Git (basique)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skill-cell">
+    <h3>Domaines principaux</h3>
+    <div class="skill-list-cols" style="margin-bottom: 1.4rem;">
+      <span>Macroéconomie</span>
+      <span>Économie internationale</span>
+      <span>Économie du développement</span>
+      <span>Économétrie</span>
+    </div>
+    <div class="domain-note">
+      <span class="domain-note-label">Travaux sur des questions de</span>
+      <div class="domain-tags">
+        <span>Économie de l'environnement</span>
+        <span>Finance de marché</span>
+        <span>Économie du genre</span>
+        <span>Économie de la corruption</span>
+        <span>Économie des conflits</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT — commenté, à activer plus tard -->
+<!--
+<div class="section-header" id="contact">
+  <h2>À propos</h2>
+  <div class="section-rule"></div>
+  <span class="section-num">04</span>
+</div>
+<section class="about-section">
+  <div class="about-inner">
+    <div>
+      <h2>Tom Meyer</h2>
+      <p>[ À compléter : quelques lignes sur ton parcours, tes centres d'intérêt, ce que tu cherches. ]</p>
+      <p>[ Exemple : Étudiant en M1 d'économie internationale à Dauphine PSL, je recherche un stage de césure
+      en analyse économique ou économétrie appliquée (institution internationale, banque centrale, cabinet de conseil). ]</p>
+    </div>
+    <div>
+      <ul class="contact-list">
+        <li><span class="c-label">Email</span><a href="mailto:ton.email@exemple.com">ton.email@exemple.com</a></li>
+        <li><span class="c-label">LinkedIn</span><a href="#">linkedin.com/in/tom-meyer</a></li>
+        <li><span class="c-label">Lieu</span>Paris, France</li>
+      </ul>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- FOOTER -->
+<footer>
+  <p>TOM MEYER — PORTFOLIO</p>
+  <p>PARIS DAUPHINE – PSL · 2026</p>
+</footer>
+
+<script>
+  function toggle(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
